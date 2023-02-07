@@ -1,0 +1,86 @@
+doctype html
+html
+    head
+        include ../head.jade
+    body
+        #wrap
+            .left_wrap
+                include adminHeader.jade
+            .right_wrap
+                h2.admin_title 주문관리
+                .admin_content
+                    table#order_manage
+                        colgroup
+                            col(width="15%")
+                            col(width="20%")
+                            col(width="10%")
+                            col(width="30%")
+                            col(width="10%")
+                            col(width="15%")
+                        caption
+                            span.table_caption 주문내역
+                        thead
+                            tr
+                                th 주문번호 (상세주문번호)
+                                th 주문일자
+                                th 주문자
+                                th 상품명
+                                th 사이즈
+                                th 배송상태 수정
+                        tbody
+                            - if(order_list.length > 0){
+                            each order, i in order_list
+                                tr
+                                    td #{order.order_no} (#{order.detail_no})
+                                    td #{order.order_date.format("yyyy-MM-dd HH시 mm분 ss초")}
+                                    td #{order.user_name}
+                                    td #{order.product_name}
+                                    td #{order.option_name}
+                                    td
+                                        select.detail_status_change(name="detail_status", data-detail_no="#{order.detail_no}")
+                                            - if(order.detail_status == "배송준비중"){
+                                                option(value="배송준비중" selected) 배송준비중
+                                            - } else {
+                                                option(value="배송준비중") 배송준비중
+                                            - }
+
+                                            - if(order.detail_status == "출고완료"){
+                                                option(value="출고완료" selected) 출고완료
+                                            - } else {
+                                                option(value="출고완료") 출고완료
+                                            - }
+
+                                            - if(order.detail_status == "배송완료"){
+                                                option(value="배송완료" selected) 배송완료
+                                            - } else {
+                                                option(value="배송완료") 배송완료
+                                            - }
+
+                                            - if(order.detail_status == "주문취소"){
+                                                option(value="주문취소" selected) 주문취소
+                                            - } else {
+                                                option(value="주문취소") 주문취소
+                                            - }
+                            - } else {
+                                tr
+                                    td(colspan="6") 주문 내역이 없습니다.
+                            - }
+                                    
+            include ../script.jade
+            script.
+                $(".detail_status_change").change(function(e){
+                    detail_no = $(this).data("detail_no");
+                    detail_status = $(this).val();
+
+                    $.ajax({
+                        type : "POST",
+                        url : "/admin/order/change_detail_status",
+                        data : { detail_status : detail_status, detail_no : detail_no },
+                        success : function(res){
+                            console.log(res);
+                        },
+                        error : function(e){
+                            console.log(e);
+                        }
+                    });
+                });

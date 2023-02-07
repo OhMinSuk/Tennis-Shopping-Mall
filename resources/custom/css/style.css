@@ -1,0 +1,958 @@
+/* Init */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  letter-spacing: -0.5px;
+  font-family: "Malgun Gothic" !important;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+}
+
+html {
+  overflow-y: scroll;
+}
+
+ul,
+ol,
+li {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: #000;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+/* Layout */
+#wrap {
+  min-width: 1024px;
+  height: 100%;
+}
+.wrap {
+  width: 1024px;
+  margin: 0 auto;
+}
+
+#header {
+  width: 100%;
+}
+
+#contents {
+  width: 100%;
+}
+
+/* LOGO */
+#logo {
+  width: 100%;
+  text-align: center;
+  margin-top: 30px;
+}
+#logo a {
+  width: 100%;
+  color: #009e47;
+}
+
+/* Util Menu */
+#util {
+  width: auto;
+  text-align: right;
+  margin-top: 10px;
+}
+
+#util > li {
+  display: inline-block;
+  margin-left: 10px;
+}
+
+/* Navigation */
+#menu {
+  width: 100%;
+  display: block;
+  border: 1px solid #333;
+  margin-top: 40px;
+  text-align: center;
+}
+
+.menu {
+  display: inline-block;
+}
+
+.menu > li {
+  float: left;
+  text-align: center;
+}
+
+.menu > li > a {
+  display: inline-block;
+  padding: 20px 40px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.menu > li > a:hover {
+  color: #0068ff;
+}
+
+/* Main Visual */
+#mainVisual {
+  width: 100%;
+  margin-top: 30px;
+}
+#mainVisual > img {
+  width: 100%;
+}
+
+/* Sub Page */
+#sub {
+  float: left;
+  width: 100%;
+  padding-bottom: 80px;
+}
+
+/* LOGIN PAGE */
+#login {
+  width: 30%;
+  margin: 0 auto;
+  margin-top: 30px;
+}
+#login > .subTitle {
+  width: 100%;
+  text-align: center;
+  font-size: 22px;
+  font-weight: normal;
+}
+
+#login > form {
+  float: left;
+  width: 100%;
+  margin-top: 30px;
+}
+
+#login > form > ul {
+  float: left;
+  width: 100%;
+  height: 30px;
+  margin-bottom: 10px;
+}
+
+#login > form > ul > li {
+  float: left;
+  height: 100%;
+}
+
+#login > form > ul > li:first-child {
+  float: left;
+  width: 30%;
+}
+
+#login > form > ul > li:first-child > label {
+  float: left;
+  width: 100%;
+  text-align: center;
+  font-size: 17px;
+}
+
+#login > form > ul > li:last-child {
+  float: left;
+  width: 60%;
+}
+
+#login > form > ul > li:last-child > input {
+  float: left;
+  width: 100%;
+  height: 100%;
+  padding: 0 5px;
+}
+
+#login .btnArea {
+  width: 100%;
+  display: inline-block;
+  text-align: center;
+}
+
+#login .btnArea > p {
+  width: 100%;
+  margin-top: 10px;
+}
+#login .btnArea > p > button {
+  padding: 5px 20px;
+}
+
+/* JOIN PAGE */
+
+#join {
+  width: 30%;
+  margin: 0 auto;
+  margin-top: 30px;
+}
+#join > .subTitle {
+  width: 100%;
+  text-align: center;
+  font-size: 22px;
+  font-weight: normal;
+}
+
+#join > form {
+  float: left;
+  width: 100%;
+  margin-top: 30px;
+}
+
+#join > form > ul {
+  float: left;
+  width: 100%;
+  height: 30px;
+  margin-bottom: 10px;
+}
+
+#join > form > ul > li {
+  float: left;
+  height: 100%;
+}
+
+#join > form > ul > li:first-child {
+  float: left;
+  width: 40%;
+}
+
+#join > form > ul > li:first-child > label {
+  float: left;
+  width: 100%;
+  text-align: center;
+  font-size: 17px;
+}
+
+#join > form > ul > li:last-child {
+  float: left;
+  width: 60%;
+}
+
+#join > form > ul > li:last-child > input {
+  float: left;
+  width: 100%;
+  height: 100%;
+  padding: 0 5px;
+}
+
+#join .btnArea {
+  width: 100%;
+  display: inline-block;
+  text-align: center;
+}
+
+#join .btnArea > p {
+  display: inline-block;
+  width: 100%;
+  margin-top: 10px;
+}
+#join .btnArea > p > button {
+  padding: 5px 20px;
+}
+
+/* Product List */
+#productList {
+  float: left;
+  width: 100%;
+}
+
+#productList > #sub {
+  float: left;
+  width: 100%;
+}
+
+#sub .sub_top {
+  float: left;
+  width: 100%;
+  margin-top: 10px;
+}
+
+#sub .sub_top > .sub_title {
+  float: left;
+  width: 15%;
+  text-align: center;
+}
+
+#sub .sub_top > .product_brand_list {
+  float: left;
+  width: 85%;
+}
+
+.product_brand_list > li {
+  float: left;
+  width: 10%;
+  padding: 0 5px;
+}
+
+.product_brand_list > li > a {
+  float: left;
+  width: 100%;
+  text-align: center;
+  border: 2px solid #333;
+  border-radius: 5px;
+  font-size: 14px !important;
+  padding: 3px 5px;
+  transition: 0.2s;
+}
+
+.product_brand_list > li > a:hover {
+  background-color: #0068ff;
+  color: #fff;
+}
+
+.sub_content {
+  float: left;
+  width: 100%;
+  margin-top: 30px;
+}
+.sub_content .productList {
+  float: left;
+  width: 100%;
+}
+
+.productList .product {
+  float: left;
+  width: 25%;
+  height: 350px;
+  padding: 0 15px;
+}
+
+.productList a {
+  float: left;
+  width: 100%;
+}
+
+#productList .product .product_image {
+  float: left;
+  width: 100%;
+  height: 226px;
+  position: relative;
+}
+
+#productList .product_image img {
+  float: left;
+  width: 100%;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.product .product_image {
+  float: left;
+  width: 100%;
+}
+
+.product_image img {
+  float: left;
+  width: 100%;
+}
+
+.product .product_content {
+  float: left;
+  width: 100%;
+}
+
+.product_content .product_brand {
+  float: left;
+  width: 100%;
+  font-size: 13px;
+  color: #0068ff;
+  margin: 5px 0;
+}
+.product_content .product_name {
+  float: left;
+  width: 100%;
+  font-weight: bold;
+  font-size: 15px;
+  margin-bottom: 5px;
+}
+.product_content .product_price {
+  float: left;
+  width: 100%;
+  font-size: 14px;
+  font-weight: bold;
+  color: #0068ff;
+  text-align: right;
+}
+
+#productDetail {
+  float: left;
+  width: 100%;
+}
+.product_detail_left {
+  float: left;
+  width: 40%;
+}
+
+.product_detail_left .product_image {
+  float: left;
+  width: 100%;
+}
+
+.product_detail_right {
+  float: left;
+  width: 60%;
+  padding-left: 100px;
+}
+
+.product_detail_right .product_info {
+  float: left;
+  width: 100%;
+}
+.product_info .product_name {
+  float: left;
+  width: 100%;
+  font-size: 25px;
+  padding: 20px 0;
+  border-bottom: 1px solid #333;
+}
+
+.product_info .product_content {
+  float: left;
+  width: 100%;
+  font-size: 14px;
+  border-bottom: 1px solid #333;
+  padding: 20px 0;
+  line-height: 150%;
+}
+
+.product_info .product_buy_area {
+  float: left;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.product_buy_area form {
+  float: left;
+  width: 100%;
+}
+.product_buy_area ul {
+  float: left;
+  width: 100%;
+  text-align: center;
+}
+
+.product_buy_area ul li {
+  display: inline-block;
+  padding: 10px 30px;
+}
+
+.text-blue {
+  color: #0068ff;
+  font-weight: bold;
+}
+
+.product_option li:first-child {
+  padding: 10px 45px !important;
+}
+.product_option li:last-child {
+  padding: 10px 15px !important;
+}
+
+.product_option select {
+  font-size: 17px;
+  padding: 0 10px;
+}
+
+.product_buy_button {
+  float: left;
+  width: 100%;
+}
+
+#product_buy_button {
+  background-color: #0068ff;
+  color: #fff;
+  border: 0;
+  padding: 5px 30px;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+#product_get_basket_button {
+  background-color: #fff;
+  color: #000;
+  border: 2px solid #333;
+  font-size: 18px;
+  padding: 5px 20px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* 주문내역 */
+#orderList {
+  float: left;
+  width: 100%;
+}
+
+#orderList .sub_title {
+  float: left;
+  width: 100%;
+  border-bottom: 1px solid #bfbfbf;
+  margin-top: 20px;
+  padding-bottom: 10px;
+  padding-left: 5px;
+}
+
+.order_table {
+  float: left;
+  width: 100%;
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.order_table thead tr th {
+  line-height: 50px;
+  background-color: #ccc;
+  border: 1px solid #333;
+}
+.order_table tbody tr td {
+  border: 1px solid #333;
+  padding: 10px 0;
+}
+
+.order_table tbody tr td img {
+  width: 100%;
+}
+
+.basket_table {
+  float: left;
+  width: 100%;
+  text-align: center;
+}
+
+.basket_table thead tr th {
+  line-height: 50px;
+  background-color: #ccc;
+  border: 1px solid #333;
+}
+
+.basket_table tbody tr td {
+  border: 1px solid #333;
+  padding: 10px 0;
+}
+
+.basket_table tbody tr td img {
+  width: 100%;
+}
+
+.delete_basket_item {
+  background-color: transparent;
+  padding: 7px 15px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.empty_table {
+  line-height: 70px;
+  border-bottom: 1px solid #ccc;
+}
+
+.total_price_area {
+  float: left;
+  width: 100%;
+  text-align: center;
+  margin-top: 50px;
+  font-size: 20px;
+}
+
+.basket_button_area {
+  float: left;
+  width: 100%;
+  text-align: center;
+  margin-top: 50px;
+}
+
+.basket_button_area button {
+  background-color: transparent;
+  border: 1px solid #333;
+  margin: 0 10px;
+  padding: 10px 30px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.font-weight-bold {
+  font-weight: bold;
+}
+
+/* Admin Page */
+.left_wrap {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 220px;
+  height: 100%;
+  border-right: 1px solid #333;
+  padding: 20px;
+}
+
+.right_wrap {
+  float: left;
+  width: 100%;
+  height: 100%;
+  padding: 30px 80px 50px 300px;
+}
+
+#admin_logo {
+  float: left;
+  width: 100%;
+}
+
+#admin_logo a {
+  float: left;
+  width: 100%;
+  font-size: 20px;
+  color: #009e47;
+  text-align: center;
+}
+
+#admin_menu {
+  float: left;
+  width: 100%;
+  padding-top: 10px;
+}
+
+#admin_menu ul {
+  float: left;
+  width: 100%;
+}
+
+#admin_menu ul li {
+  float: left;
+  width: 100%;
+  margin-top: 20px;
+}
+
+#admin_menu ul li a {
+  float: left;
+  width: 100%;
+  text-align: center;
+  font-size: 18px;
+}
+
+.admin_title {
+  float: left;
+  width: 100%;
+  text-align: center;
+  margin-bottom: 30px;
+}
+.admin_content {
+  float: left;
+  width: 100%;
+}
+
+#member_manage {
+  float: left;
+  width: 100%;
+  text-align: center;
+}
+
+#member_manage thead th {
+  background-color: #eee;
+  line-height: 200%;
+}
+#member_manage tbody td {
+  line-height: 170%;
+}
+
+#member_manage thead th,
+#member_manage tbody td {
+  border: 1px solid #333;
+}
+
+#product_manage {
+  float: left;
+  width: 100%;
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+#product_manage thead th {
+  background-color: #eee;
+  line-height: 200%;
+}
+#product_manage tbody td {
+  line-height: 170%;
+}
+
+#product_manage thead th,
+#product_manage tbody td {
+  border: 1px solid #333;
+}
+
+.product_option_td {
+  font-size: 14px;
+}
+
+.table_caption {
+  float: left;
+  font-weight: bold;
+  line-height: 50px;
+}
+
+.product_add_btn {
+  float: right;
+  padding: 0 20px;
+  background-color: #eee;
+  border: 1px solid #333;
+  font-size: 17px;
+  font-weight: bold;
+  border-radius: 10px;
+  line-height: 40px;
+}
+
+.product_modify_btn,
+.product_delete_btn {
+  font-size: 14px;
+  background-color: #eee;
+  border: 1px solid #333;
+  font-weight: bold;
+  padding: 5px 15px;
+  margin: 5px 0;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#product_add {
+  float: left;
+  width: 100%;
+}
+
+#product_add ul {
+  float: left;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+#product_add ul li {
+  float: left;
+  line-height: 30px;
+}
+
+#product_add ul li:first-child {
+  width: 5%;
+  text-align: right;
+  margin-right: 10px;
+}
+#product_add ul li > label {
+  float: left;
+  width: 100%;
+  text-align: right;
+}
+
+#product_add ul li:last-child {
+  width: 30%;
+}
+
+#product_name {
+  float: left;
+  width: 100%;
+  border: 1px solid #333;
+  line-height: 30px;
+  padding: 0 10px;
+}
+
+#product_image {
+  border: 1px solid #333;
+  padding: 5px;
+}
+
+#product_image + p {
+  float: left;
+  width: 100%;
+}
+
+#product_image + p:nth-child(2) {
+  margin-top: 15px;
+}
+
+#product_image + p img {
+  float: left;
+  height: 226px;
+}
+
+#product_type {
+  float: left;
+  height: 32px;
+  border: 1px solid #333;
+}
+
+#product_brand,
+#product_price {
+  float: left;
+  width: 35%;
+  border: 1px solid #333;
+  line-height: 30px;
+  padding: 0 10px;
+}
+
+#product_price {
+  text-align: right;
+  font-size: 16px;
+}
+
+.product_option_area {
+  float: left;
+  width: 35%;
+  margin-bottom: 10px;
+}
+
+.product_option_area > label {
+  float: left;
+  width: 50%;
+  text-align: right;
+  padding-right: 10px;
+}
+
+.product_option_area > input {
+  float: left;
+  width: 50%;
+  padding-left: 5px;
+  line-height: 26px;
+  font-size: 16px;
+}
+
+#product_content {
+  float: left;
+  width: 100%;
+  height: 300px;
+  padding: 5px;
+  resize: none;
+  overflow-y: scroll;
+}
+
+#product_add_ok_btn {
+  float: right;
+  width: 20%;
+  line-height: 35px;
+  background-color: #eee;
+  border: 1px solid #333;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+#product_modify {
+  float: left;
+  width: 100%;
+}
+
+#product_modify ul {
+  float: left;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+#product_modify ul li {
+  float: left;
+  line-height: 30px;
+}
+
+#product_modify ul li:first-child {
+  width: 5%;
+  text-align: right;
+  margin-right: 10px;
+}
+#product_modify ul li > label {
+  float: left;
+  width: 100%;
+  text-align: right;
+}
+
+#product_modify ul li:last-child {
+  width: 30%;
+}
+
+#product_name {
+  float: left;
+  width: 100%;
+  border: 1px solid #333;
+  line-height: 30px;
+  padding: 0 10px;
+}
+
+#product_image {
+  border: 1px solid #333;
+  padding: 5px;
+}
+
+#product_image + p {
+  float: left;
+  width: 100%;
+}
+
+#product_image + p:nth-child(2) {
+  margin-top: 15px;
+}
+
+#product_image + p img {
+  float: left;
+  height: 226px;
+}
+
+#product_type {
+  float: left;
+  height: 32px;
+  border: 1px solid #333;
+}
+
+#product_brand,
+#product_price {
+  float: left;
+  width: 35%;
+  border: 1px solid #333;
+  line-height: 30px;
+  padding: 0 10px;
+}
+
+#product_price {
+  text-align: right;
+  font-size: 16px;
+}
+
+#product_content {
+  float: left;
+  width: 100%;
+  height: 300px;
+  padding: 5px;
+  resize: none;
+  overflow-y: scroll;
+}
+
+#product_modify_ok_btn {
+  float: right;
+  width: 20%;
+  line-height: 35px;
+  background-color: #eee;
+  border: 1px solid #333;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+#order_manage {
+  float: left;
+  width: 100%;
+  text-align: center;
+}
+
+#order_manage thead th {
+  background-color: #eee;
+  line-height: 200%;
+}
+#order_manage tbody td {
+  line-height: 170%;
+}
+
+#order_manage thead th,
+#order_manage tbody td {
+  border: 1px solid #333;
+}

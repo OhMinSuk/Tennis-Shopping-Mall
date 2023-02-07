@@ -1,0 +1,32 @@
+doctype html 
+html
+    head
+        include ../head.jade
+    body
+        #wrap
+            include ../header.jade
+            #contents
+                .wrap
+                    #productList
+                        #sub
+                            .sub_top
+                                h4.sub_title #{type_name}(#{product_list.length})
+                                ul.product_brand_list
+                                    li
+                                        a(href="/public/#{product_type}") 전체
+                                    each product_brand, i in product_brand_list
+                                        li
+                                            a(href="/public/#{product_type}?product_brand=#{product_brand.product_brand}") #{product_brand.product_brand}
+                            .sub_content
+                                .productList
+                                    each product, i in product_list
+                                        .product
+                                            a(href="/public/productdetail?product_no=#{product.product_no}" title="#{product.product_name}") 
+                                                .product_image
+                                                    img(src="/uploadFiles/#{product.image_name}", alt="#{product.image_name}")
+                                                .product_content
+                                                    .product_brand #{product.product_brand}
+                                                    .product_name #{product.product_name}
+                                                    .product_price #{product.product_price.numberWithCommas()} 원
+
+        include ../script.jade

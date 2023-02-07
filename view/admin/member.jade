@@ -1,0 +1,35 @@
+doctype html
+html
+    head
+        include ../head.jade
+    body
+        #wrap
+            .left_wrap
+                include adminHeader.jade
+            .right_wrap
+                h2.admin_title 회원관리
+                .admin_content
+                    table#member_manage
+                        colgroup
+                            col(width="10%")
+                            col(width="20%")
+                            col(width="15%")
+                            col(width="25%")
+                            col(width="30%")
+                        thead
+                            tr
+                                th 회원번호
+                                th 아이디
+                                th 이름
+                                th 연락처
+                                th 주소
+                        tbody
+                            each user, i in user_list
+                                tr
+                                    td #{user.user_no}
+                                    td #{user.user_id}
+                                    td #{user.user_name}
+                                    td #{user.user_phone}
+                                    td #{user.user_address}
+                                    
+            include ../script.jade

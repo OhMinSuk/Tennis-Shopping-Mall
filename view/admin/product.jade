@@ -1,0 +1,79 @@
+doctype html
+html
+    head
+        include ../head.jade
+    body
+        #wrap
+            .left_wrap
+                include adminHeader.jade
+            .right_wrap
+                h2.admin_title 상품관리
+                .admin_content
+                    table#product_manage
+                        colgroup
+                            col(width="5%")
+                            col(width="35%")
+                            col(width="10%")
+                            col(width="10%")
+                            col(width="20%")
+                            col(width="10%")
+                            col(width="10%")
+                        caption
+                            span.table_caption 상품목록
+                            a.product_add_btn(href="/admin/product/add") 상품등록
+                        thead
+                            tr
+                                th 상품분류
+                                th 상품명
+                                th 브랜드
+                                th 상품가격
+                                th 재고
+                                th 수정
+                                th 삭제
+                        tbody
+                            each product, i in product_list
+                                tr
+                                    td #{product.product_no}
+                                    td #{product.product_name}
+                                    td #{product.product_brand}
+                                    td #{product.product_price.numberWithCommas()} 원
+                                    td.product_option_td
+                                        each option, j in option_list
+                                            -if(option.product_no == product.product_no)
+                                                | (#{option.option_name} - #{option.option_number}), 
+                                    td
+                                        a.product_modify_btn(href="/admin/product/modify/#{product.product_no}") 수정
+                                    td
+                                        button.product_delete_btn(type="button" data-product_no="#{product.product_no}") 삭제
+        include ../script.jade
+        script.
+            $(function(){
+                $(".product_option_td").each(function(i, td){
+                    text_length = $(td).text().trim().length;
+                    sub_str = $(td).text().trim().substr(0, text_length - 1);
+                    $(td).text(sub_str);
+                });
+
+                $(".product_delete_btn").click(function(e){
+                    if(confirm("해당 상품을 정말 삭제 하시겠습니까?")){
+                        product_no = $(this).data("product_no");
+
+                        $.ajax({
+                            type : "POST",
+                            url : "/admin/product/delete",
+                            data : { product_no : product_no },
+                            success : (res) => {
+                                if(res.product_delete_success){
+                                    alert("상품 삭제가 완료되었습니다.");
+                                    link("/admin/product");
+                                }
+                            },
+                            error : (err) => {
+                                console.log(err);
+                            }
+                        });
+                    }
+                });
+            });
+
+            

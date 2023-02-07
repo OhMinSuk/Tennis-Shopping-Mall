@@ -1,0 +1,155 @@
+doctype html 
+html
+    head
+        include ../head.jade
+    body
+        #wrap
+            include ../header.jade
+            #contents
+                .wrap
+                    #orderList
+                        #sub
+                            h2.sub_title 장바구니
+                            .sub_content
+                                form#basketForm(method="post" onsubmit="return false;")
+                                    table.basket_table
+                                        colgroup
+                                            col(width="10%")
+                                            col(width="10%")
+                                            col(width="35%")
+                                            col(width="10%")
+                                            col(width="15%")
+                                            col(width="10%")
+                                        thead
+                                            thead
+                                                tr
+                                                    th
+                                                        input(type="checkbox" id="all_check" checked)
+                                                    th(colspan="2") 상품명
+                                                    th 사이즈
+                                                    th 상품금액
+                                                    th 주문관리
+                                            tbody
+                                                - if(basket_list.length != 0){
+                                                    each basket, i in basket_list
+                                                        tr
+                                                            td
+                                                                input(type="checkbox" name="basket_no" data-product_no="#{basket.product_no}" data-option_no="#{basket.option_no}" data-product_price="#{basket.product_price}" value="#{basket.basket_no}" checked)
+                                                            td(style="padding:10px;")
+                                                                img(src="/uploadFiles/#{basket.image_name}", alt="#{basket.image_name}")
+                                                            td(style="text-align:left; padding-left:20px;") #{basket.product_name}
+                                                            td #{basket.option_name}
+                                                            td.font-weight-bold.product_price(data-price="#{basket.product_price}") #{basket.product_price.numberWithCommas()} 원
+                                                            td 
+                                                                button.delete_basket_item(type="button" data-basket_no="#{basket.basket_no}") 삭제하기
+                                                - } else {
+                                                    tr
+                                                        td.empty_table(colspan="6") 장바구니가 비었습니다.
+                                                - }
+                                    
+                                    p.total_price_area
+                                        | 총 주문 금액 : 
+                                        span.total_price.font-weight-bold
+                                    
+                                    .basket_button_area
+                                        button#orderBasket(type="submit") 주문하기
+                                        button#removeCheckedItem(type="button") 삭제하기
+                                        
+
+                                
+
+        include ../script.jade
+        script.
+            $(function(e){
+                total_price_update();
+            });
+
+            $("input[name=basket_no]").click(function(e){
+                total_price_update();
+            });
+
+            $("#all_check").click(function(){
+                checked = $(this).prop("checked");
+                $("input[name=basket_no]").prop("checked", checked);
+
+                total_price_update();
+            });
+
+            $(".delete_basket_item").click(function(e){
+                basket_item_list = [];
+                basket_no = $(this).data("basket_no");
+                basket_item_list.push(basket_no);
+
+                delete_basket_item(basket_item_list);
+            });
+
+            $("#removeCheckedItem").click(function(e){
+                basket_item_list = [];
+
+                $("input[name=basket_no]:checked").each(function(i, checkbox){
+                    basket_item_list.push($(checkbox).val());
+                });
+
+                delete_basket_item(basket_item_list);
+            });
+
+            function delete_basket_item(basket_item_list){
+                $.ajax({
+                    type : "POST",
+                    url : "/user/basket/delete",
+                    data : { basket_item_list : JSON.stringify(basket_item_list) },
+                    success : (result) => {
+                        if(result){
+                            alert("선택한 상품을 장바구니에서 지웠습니다.");
+                            window.location.reload();
+                        }
+                    },
+                    error : (err) => {
+                        console.log(err);
+                    }
+                });
+            }
+
+            $("#basketForm").submit(function(e){
+                selected_item_list = $("input[name=basket_no]:checked");
+                basket_item_list = {};
+
+                if(selected_item_list.length > 0){
+                    $(selected_item_list).each(function(i, checkbox){
+                        basket_no = $(checkbox).val();
+                        product_no = $(checkbox).data("product_no");
+                        option_no = $(checkbox).data("option_no");
+                        product_price = $(checkbox).data("product_price");
+
+                        basket_item_list[i] = { basket_no : basket_no, product_no : product_no, option_no : option_no, detail_price : product_price };
+                    });
+
+                    $.ajax({
+                        type : "POST",
+                        url : "/public/product/buy",
+                        data : { product_buy_item_list : JSON.stringify(basket_item_list), whereAreYouFrom : "basket" },
+                        success : (res) => {
+                            if(res.productBuySuccess){
+                                alert("상품이 구매되었습니다.");
+                                link("/user/orderlist");
+                            }
+                        },
+                        error : (err) => {
+                            console.log(err);
+                        }
+                    });
+                } else {
+                    alert("상품을 선택한 후 주문하기 버튼을 누르세요.")
+                }
+            });
+
+            function total_price_update(){
+                checked_box_list = $("input[name=basket_no]:checked");
+
+                total_price = 0;
+                checked_box_list.each(function(i, checked_box){
+                    total_price += $(checked_box).data("product_price");
+                });
+
+                $(".total_price").text(total_price.numberWithCommas() + " 원");
+            }

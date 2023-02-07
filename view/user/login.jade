@@ -1,0 +1,54 @@
+doctype html
+html(lang='ko')
+  head
+    include ../head.jade
+  body
+    #wrap
+      include ../header.jade
+      // CONTENTS
+      #contents
+        .wrap
+          #sub
+            #login
+              h3.subTitle 로그인
+              form#loginForm(method='post')
+                ul
+                  li
+                    label(for='user_id') ID : 
+                  li
+                    input#user_id(type='text' name='user_id' value='' required='')
+                ul
+                  li
+                    label(for='user_pw') P/W : 
+                  li
+                    input#user_pw(type='password' name='user_pw' value='' required='')
+                .btnArea
+                  p
+                    button(type='submit') 로그인
+                  p
+                    button(type='button' onclick="link('/user/join')")
+                      | 회원가입
+                      
+    include ../script.jade
+    script.
+      $("#loginForm").submit(function(){
+        $.ajax({
+          type : "POST",
+          url : "/user/login",
+          data : $(this).serialize(),
+          success : (res) => {
+            if(res.loginFailed){
+              alert("아이디와 비밀번호를 다시 확인해주세요.");
+              return false;
+            }
+
+            alert(res.user_name + "님 환영합니다.");
+            link("/");
+          },
+          error : (e) => {
+            console.log(e);
+          }
+        });
+
+        return false;
+      });

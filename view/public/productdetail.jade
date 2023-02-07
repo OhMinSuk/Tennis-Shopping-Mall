@@ -1,0 +1,80 @@
+doctype html 
+html
+    head
+        include ../head.jade
+    body
+        #wrap
+            include ../header.jade
+            #contents
+                .wrap
+                    #productDetail 
+                        #sub
+                            .sub_content
+                                .product_detail_left
+                                    .product_image
+                                        img(src="/uploadFiles/#{product.image_name}", alt="#{product.image_name}")
+                                .product_detail_right
+                                    .product_info
+                                        h4.product_name #{product.product_name}
+                                        p.product_content #{product.product_content}
+                                        .product_buy_area
+                                            form#product_buy_form(method="post" onsubmit="return false")
+                                                input(type="hidden" name="product_no" value="#{product.product_no}")
+                                                input(type="hidden" name="detail_price" value="#{product.product_price}")
+                                                ul.product_price
+                                                    li 판매가격
+                                                    li
+                                                        span.text-blue #{product.product_price.numberWithCommas()} 원
+                                                ul.product_option
+                                                    li 사이즈
+                                                    li
+                                                        select(name="option_no", required)
+                                                            option(value="", selected) 옵션선택
+                                                            each product_option, i in product_option_list
+                                                                - if(product_option.option_number != 0){
+                                                                option(value="#{product_option.option_no}") #{product_option.option_name}
+                                                                - }
+
+                                                ul.product_buy_button
+                                                    li
+                                                        button#product_buy_button(type="submit") 바로 구매
+                                                    li
+                                                        button#product_get_basket_button(type="submit") 장바구니 담기
+
+        include ../script.jade
+        script.
+            $("#product_buy_form").submit(function(e){
+                button = e.originalEvent.submitter.id; // 무슨 버튼을 클릭했는지 식별
+                url = button == "product_buy_button" ? "/public/product/buy" : "/public/product/basket";
+
+                product_no = $("input[name=product_no]").val();
+                option_no = $("select[name=option_no]").val();
+                detail_price = $("input[name=detail_price]").val();
+
+                product_item = {};
+                product_item[0] = { product_no : product_no, option_no : option_no, detail_price : detail_price };
+
+                $.ajax({
+                    type : "POST",
+                    url : url,
+                    data : { product_buy_item_list : JSON.stringify(product_item) },
+                    success : (res) => {
+                        if(res.loginRequired){
+                            alert("로그인 후 이용할 수 있는 서비스입니다.");
+                            link("/user/login");
+                        }
+
+                        if(res.productBuySuccess){
+                            alert("상품이 구매되었습니다.");
+                            link("/user/orderlist");
+                        }
+
+                        if(res.basketInsertSuccess){
+                            alert("장바구니에 상품을 담았습니다.");
+                        }
+                    },
+                    error : (err) => {
+                        console.log(err);
+                    }
+                });
+            });

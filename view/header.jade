@@ -1,0 +1,39 @@
+// HEADER
+header#header
+  .wrap
+    ul#util
+      - if(session.user_no){
+        li
+          strong #{session.user_name}
+          |  님 환영합니다.
+        li 
+          a(href="/user/basket")
+            strong 장바구니
+        li 
+          a(href="/user/orderlist")
+            strong 주문내역
+        li
+          a(href='/user/logout')
+            strong 로그아웃
+        - if(session.user_lv == 1){
+        li
+          a(href='/admin/member')
+            strong 관리자페이지
+        - }
+      - } else {
+        li
+          a(href='/user/login') 로그인
+        li
+          a(href='/user/join') 회원가입
+      - }
+      // LOGO
+      h1#logo
+        a(href='/' title='HOME') 테니스 용품 쇼핑몰
+    nav#menu
+      ul.menu
+        li
+          a(href='/public/racket') 테니스 라켓
+        li
+          a(href='/public/etc') 테니스 용품
+        li
+          a(href='/public/cloth') 테니스 의류

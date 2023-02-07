@@ -1,0 +1,82 @@
+doctype html 
+html
+    head
+        include ../head.jade
+    body
+        #wrap
+            include ../header.jade
+            #contents
+                .wrap
+                    #orderList
+                        #sub
+                            h2.sub_title 주문내역
+                            .sub_content
+                                - if(order_list.length != 0){
+                                each order, i in order_list
+                                    table.order_table
+                                        colgroup
+                                            col(width="10%")
+                                            col(width="10%")
+                                            col(width="40%")
+                                            col(width="10%")
+                                            col(width="10%")
+                                            col(width="10%")
+                                            col(width="10%")
+                                        thead
+                                            tr
+                                                th 주문번호
+                                                th(colspan="2") 상품명
+                                                th 사이즈
+                                                th 상품금액
+                                                th 배송상태
+                                                th 주문일자
+                                        tbody
+                                            each order_detail, i in order_detail_list
+                                                - if(order.order_no == order_detail.order_no){
+                                                    tr
+                                                        td #{order.order_no}
+                                                        td(style="padding-left:10px; padding-right:10px;")
+                                                            img(src="/uploadFiles/#{order_detail.image_name}", alt="#{order_detail.image_name}")
+                                                        td(style="padding-left:10px; text-align:left;") #{order_detail.product_name}
+                                                        td #{order_detail.option_name}
+                                                        td #{order_detail.detail_price.numberWithCommas()} 원
+                                                        td #{order_detail.detail_status}
+                                                        td #{order_detail.order_date.format("yyyy-MM-dd")}
+                                                - }
+                                - } else {
+                                    table.order_table
+                                        colgroup
+                                                col(width="10%")
+                                                col(width="10%")
+                                                col(width="40%")
+                                                col(width="10%")
+                                                col(width="10%")
+                                                col(width="10%")
+                                                col(width="10%")
+                                            thead
+                                                tr
+                                                    th 주문번호
+                                                    th(colspan="2") 상품명
+                                                    th 사이즈
+                                                    th 상품금액
+                                                    th 배송상태
+                                                    th 주문일자
+                                            tbody
+                                                tr
+                                                    td.empty_table(colspan="7") 주문내역이 없습니다.
+                                - }
+                                        
+
+                                
+
+        include ../script.jade
+        script.
+            $(function(){
+                $(".order_table").each(function(i, table){
+                    tbody = $(table).find("tbody");
+                    rowspan = tbody.find("tr").length;
+                    
+                    $(tbody).find("tr:not(:first-child)").find("td:first-child").remove();
+                    $(tbody).find("tr:first-child").find("td:first-child").attr("rowspan", rowspan);
+                });
+            });

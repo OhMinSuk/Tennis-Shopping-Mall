@@ -1,0 +1,104 @@
+doctype html
+html
+    head
+        include ../head.jade
+    body
+        #wrap
+            .left_wrap
+                include adminHeader.jade
+            .right_wrap
+                h2.admin_title 상품수정
+                .admin_content
+                    form#product_modify(action="/admin/product/modify/#{product[0].product_no}", method="post", enctype="multipart/form-data")
+                        ul
+                            li
+                                label(for="product_name") 상품명 : 
+                            li
+                                input#product_name(type="text" name="product_name" required value="#{product[0].product_name}")
+                        ul
+                            li
+                                label(for="product_image") 이미지 : 
+                            li
+                                input#product_image(type="file" name="product_image" required)
+                                p
+                                    img(src="/uploadFiles/#{product[0].image_name}", alt="#{product[0].image_name}" title="#{product[0].image_name}")
+                                p #{product[0].image_name}
+                        ul
+                            li
+                                label(for="product_type") 상품분류 : 
+                            li 
+                                select#product_type(name="product_type" required)
+                                    - if(product[0].product_type == "racket"){
+                                    option(value="racket" selected) 테니스 라켓
+                                    - } else {
+                                    option(value="racket") 테니스 라켓
+                                    - }
+
+                                    - if(product[0].product_type == "etc"){
+                                    option(value="etc" selected) 테니스 용품
+                                    - } else {
+                                    option(value="etc") 테니스 용품
+                                    - }
+
+                                    - if(product[0].product_type == "cloth"){
+                                    option(value="cloth" selected) 테니스 의류
+                                    - } else {
+                                    option(value="cloth") 테니스 의류
+                                    -}
+                        ul
+                            li
+                                label(for="product_brand") 브랜드 : 
+                            li
+                                input#product_brand(type="text" name="product_brand" required value="#{product[0].product_brand}")
+                        ul
+                            li
+                                label(for="product_price") 가격 : 
+                            li
+                                input#product_price(type="number" name="product_price" value="#{product[0].product_price}" required)
+                                | &nbsp;원
+                        ul
+                            li 재고 옵션 : 
+                            li
+                                .product_option_area
+                                    label(for="option_null") 옵션 없음
+                                    input#option_null(type="number" name="option_number_null" min="0" value="#{product_option_list[0]}" required)
+                                .product_option_area
+                                    label(for="option_small") S
+                                    input#option_small(type="number" name="option_number_small" min="0" value="#{product_option_list[1]}" required)
+                                .product_option_area
+                                    label(for="option_medium") M
+                                    input#option_medium(type="number" name="option_number_medium" min="0" value="#{product_option_list[2]}" required)
+                                .product_option_area
+                                    label(for="option_large") L
+                                    input#option_large(type="number" name="option_number_large" min="0" value="#{product_option_list[3]}" required)
+                        ul
+                            li
+                                label(for="product_content") 상품설명 :
+                            li
+                                textarea#product_content(name="product_content" required) #{product[0].product_content}
+                        ul
+                            li &nbsp
+                            li
+                                button#product_modify_ok_btn(type="submit") 수정
+                        
+
+                
+        include ../script.jade
+        script.
+            $("#product_modify").submit(function(e){
+                option_list = $(".product_option_area input");
+                option_list_array = [];
+
+                option_list.each(function(i, option){
+                    option_number = $(option).val();
+
+                    if(option_number > 0)
+                        option_list_array.push(option_number);
+                });
+
+                if(option_list_array.length < 1){
+                    alert("재고 옵션을 1개 이상 입력해주세요.");
+                    return false;
+                }
+
+            });
